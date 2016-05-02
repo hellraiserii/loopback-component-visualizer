@@ -1,0 +1,19 @@
+{
+  "name": "loopback-component-visualizer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Prashant Baid",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^2.4.1",
+    "loopback-boot": "^2.18.1",
+    "open": "0.0.5"
+  },
+  "bin": {
+    "loopback-component-visualizer": "index.js"
+  }
+}
