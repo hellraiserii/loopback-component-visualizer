@@ -1,0 +1,29 @@
+{
+  "name": "loopback-component-visualizer",
+  "version": "1.0.0",
+  "description": "Loopback component to visualize models and their relationships",
+  "main": "index.js",
+  "scripts": {
+      "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yantrashala/loopback-component-visualizer.git"
+  },
+  "author": "prashantbaid, pbhadauria2000",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yantrashala/loopback-component-visualizer/issues"
+  },
+  "homepage": "https://github.com/yantrashala/loopback-component-visualizer#readme",
+  "dependencies": {
+    "lodash": "^4.12.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "loopback": "^2.28.0",
+    "loopback-datasource-juggler": "^2.46.0",
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0"
+  }
+}
