@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>Loopback Component Visualizer</title>
+  <title>Visualizer</title>
 
   <script type="text/javascript" src="http://visjs.org/dist/vis.js"></script>
   <link href="http://visjs.org/dist/vis.css" rel="stylesheet" type="text/css" />
@@ -20,7 +20,7 @@
       margin: 0 auto;
     }
     body #header {
-  background-color: #08592b !important;
+  background-color: #29088A !important;
   position: fixed;
   width: 100%;
   top: 0;
@@ -85,7 +85,7 @@ body #header a#logo {
 <body>
   <div id='header'>
       <div class="swagger-ui-wrap">
-          <a id="logo">StrongLoop Model Visualizer</a>
+          <a id="logo">Visualizer</a>
       </div>
   </div>
 <div id="mynetwork"></div>
@@ -95,7 +95,7 @@ var arr = [];
 for(var i in nodes) {
   var node = nodes[i];
   %>
-  arr.push({id: <%= node.id %>, label: '<%=node.name%>', shape: 'box', color: '#999999'});
+  arr.push({id: <%= node.id %>, label: '<%=node.name%>'});
 <%}%>
   // create an array with nodes
   var nodes = new vis.DataSet(arr);
@@ -110,7 +110,43 @@ for(var i in nodes) {
     edges: edges
   };
   var options = {
+  physics: {
+    enabled: true,
+    repulsion: {
+      nodeDistance: 150
+    },
+    hierarchicalRepulsion: {
+      centralGravity: 0.0,
+      springLength: 100,
+      springConstant: 0.01,
+      nodeDistance: 150,
+      damping: 0.09
+    },
+    maxVelocity: 50,
+    minVelocity: 0.1,
+    solver: 'barnesHut',
+    stabilization: {
+      enabled: false,
+      iterations: 1000,
+      updateInterval: 100,
+      onlyDynamicEdges: false,
+      fit: true
+    }
+  },
+  layout: {
+      hierarchical: {
+        enabled: true,
+        sortMethod: 'directed',
+        direction: 'LR'
+      }
+  },
   nodes: {
+    color: '#999999',
+    shape: 'box',
+    shapeProperties: {
+      borderRadius: 0
+    },
+    physics: false,
     borderWidth: 1,
     font: {
       color: '#343434',
@@ -121,10 +157,17 @@ for(var i in nodes) {
       strokeColor: '#ffffff',
       align: 'left'
     }
+  },
+  edges: {
+    physics: false,
+    arrows: 'to',
+    smooth : {
+      enabled: false
+    }
   }
 }
   var network = new vis.Network(container, data, options);
-//  network.stabilize();
+ network.stabilize();
 network.on("click", function (params) {
   var nodeArr = <%-JSON.stringify(nodes)%>;
   console.log('params', params.nodes);
