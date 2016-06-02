@@ -1,15 +1,43 @@
 'use strict';
 
 var _defaults = require('lodash').defaults;
+var path = require('path');
 
+var STATIC_ROOT = path.join(__dirname, 'public');
 module.exports = visualize;
 
-
 function visualize(loopbackApp, options) {
+
     options = _defaults({}, options, {
         mountPath: '/visualize'
     });
-    loopbackApp.use(options.mountPath, createDiagram(loopbackApp, options));
+    loopbackApp.use(options.mountPath, visualizeRoutes(loopbackApp, options));
+}
+
+function visualizeRoutes(loopbackApp, options) {
+    var loopback = loopbackApp.loopback;
+
+    var router = new loopback.Router();
+
+    var resourcePath = '/visual.json';
+
+    var boundedContext = {};
+
+    loopbackApp.on('modelRemoted', function() {
+      boundedContext = createDiagram(loopbackApplication, opts);
+    });
+
+    loopbackApp.on('remoteMethodDisabled', function() {
+      boundedContext = createDiagram(loopbackApplication, opts);
+    });
+
+    boundedContext = createDiagram(loopbackApp, router, options);
+    router.get('/vis/:modelName', function(req, res) {
+      res.status(200).send(boundedContext);
+    });
+
+    router.use(loopback.static(STATIC_ROOT));
+    return router;
 }
 
 function createDiagram(app, options) {
@@ -72,11 +100,5 @@ function createDiagram(app, options) {
     finalObj.nodes = propArr;
     finalObj.edges = edgeArr;
 
-    return function(req, res, next) {
-
-        var render = app.loopback.template(__dirname + '/template.ejs');
-        var html = render(finalObj);
-
-        res.send(200, html);
-    };
+    return finalObj;
 }
