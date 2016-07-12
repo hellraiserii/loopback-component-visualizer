@@ -1,6 +1,6 @@
 # loopback-component-visualizer
 
-[![Build status](https://img.shields.io/travis/yantrashala/loopback-component-visualizer/master.svg)](https://travis-ci.org/yantrashala/loopback-component-visualizer)
+[![Build status](https://travis-ci.org/yantrashala/loopback-component-visualizer.svg?branch=v0.1.0)](https://travis-ci.org/yantrashala/loopback-component-visualizer)
 
 [![GitHub issues](https://img.shields.io/github/issues/yantrashala/loopback-component-visualizer.svg)](https://github.com/yantrashala/loopback-component-visualizer/issues)
 
@@ -38,4 +38,4 @@ You can browse @ http://host:port/visualize
 
 #### Preview
 
-![A Relational Model](https://github.com/yantrashala/loopback-component-visualizer/master/preview.png?raw=true "A Relational Model")
+![A Relational Model](https://github.com/yantrashala/loopback-component-visualizer/v0.1.0/preview.png?raw=true "A Relational Model")
