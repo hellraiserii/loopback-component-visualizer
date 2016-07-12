@@ -1,5 +1,12 @@
 language: node_js
+
+env:
+- CODECOV_TOKEN="70be989e-dd91-4fd3-b1fd-7a52ec06188f"
+
 node_js:
   - "6"
   - "5"
   - "4"
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
