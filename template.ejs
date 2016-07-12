@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+  <title>Loopback Component Visualizer</title>
+
+  <script type="text/javascript" src="http://visjs.org/dist/vis.js"></script>
+  <link href="http://visjs.org/dist/vis.css" rel="stylesheet" type="text/css" />
+
+  <style type="text/css">
+  body {
+    height: 100%;
+    margin: 0;
+    padding-top: 60px;
+    font-family: 'helvetica neue', helvetica, arial, sans-serif;
+  }
+    #mynetwork {
+      width: 100%;
+      height: 700px;
+      border: 1px solid lightgray;
+      margin: 0 auto;
+    }
+    body #header {
+  background-color: #08592b !important;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  font-family: 'helvetica neue', helvetica, arial, sans-serif !important;
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  height: 60px;
+  padding-top: 10px;
+}
+
+body #header a#logo {
+  font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+  padding: 20px 0 20px 60px !important;
+}
+.black_overlay{
+	display: none;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index:1001;
+	-moz-opacity: 0.8;
+	opacity:.80;
+	filter: alpha(opacity=80);
+}
+
+.white_content {
+	display: none;
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	width: 30%;
+	height: 50%;
+	padding: 20px;
+  border-radius: 5px;
+	background-color: white;
+  font-family: 'helvetica neue', helvetica, arial, sans-serif !important;
+	z-index:1002;
+	overflow: auto;
+}
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.close:hover {
+  color: #06D85F;
+}
+  </style>
+</head>
+<body>
+  <div id='header'>
+      <div class="swagger-ui-wrap">
+          <a id="logo">Domain Model Visualizer</a>
+      </div>
+  </div>
+<div id="mynetwork"></div>
+<script type="text/javascript">
+var arr = [];
+<%
+for(var i in nodes) {
+  var node = nodes[i];
+  %>
+  arr.push({id: <%= node.id %>, label: '<%=node.name%>'});
+<%}%>
+  // create an array with nodes
+    var nodes = new vis.DataSet(arr);
+  //
+  // // create an array with edges
+   var edges = new vis.DataSet(<%- JSON.stringify(edges) %>);
+
+  // create a network
+  var container = document.getElementById('mynetwork');
+  var data = {
+    nodes: nodes,
+    edges: edges
+  };
+  var options = {
+  nodes: {
+    shape: 'dot',
+    borderWidth: 1,
+    scaling: {
+      label: {
+        min: 2000
+      }
+    },
+    font: {
+      color: '#343434',
+      size: 15, // px
+      face: 'arial',
+      background: 'none',
+      strokeWidth: 0, // px
+      strokeColor: '#ffffff',
+      align: 'left'
+    }
+  }
+}
+  var network = new vis.Network(container, data, options);
+
+</script>
+<div id="light" class="white_content">
+</div>
+<div id="fade" class="black_overlay"></div>
+</body>
+</html>
