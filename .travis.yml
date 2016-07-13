@@ -1,12 +1,14 @@
 language: node_js
-
+sudo: false
 env:
 - CODECOV_TOKEN="70be989e-dd91-4fd3-b1fd-7a52ec06188f"
-
 node_js:
   - "6"
   - "5"
   - "4"
 
 after_success:
+  - npm run coverage
+  - codecov
+  - cat ./coverage/lcov.info | coveralls
   - bash <(curl -s https://codecov.io/bash)

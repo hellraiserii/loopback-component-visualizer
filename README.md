@@ -38,4 +38,4 @@ You can browse @ http://host:port/visualize
 
 #### Preview
 
-![A Relational Model](https://github.com/yantrashala/loopback-component-visualizer/blob/v0.1.0/preview.png?raw=true "A Relational Model")
+![A Relational Model](https://github.com/yantrashala/loopback-component-visualizer/blob/v0.1.0/preview.jpg?raw=true "A Relational Model")
