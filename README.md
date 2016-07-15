@@ -1,10 +1,6 @@
 # loopback-component-visualizer
 
-[![Build status](https://travis-ci.org/yantrashala/loopback-component-visualizer.svg?branch=v0.1.0)](https://travis-ci.org/yantrashala/loopback-component-visualizer)
-
-[![codecov](https://codecov.io/gh/yantrashala/loopback-component-visualizer/branch/master/graph/badge.svg)](https://codecov.io/gh/yantrashala/loopback-component-visualizer)
-
-[![GitHub issues](https://img.shields.io/github/issues/yantrashala/loopback-component-visualizer.svg)](https://github.com/yantrashala/loopback-component-visualizer/issues)
+[![Build status](https://travis-ci.org/yantrashala/loopback-component-visualizer.svg)](https://travis-ci.org/yantrashala/loopback-component-visualizer) [![Dep Badge](https://david-dm.org/yantrashala/loopback-component-visualizer.svg)](https://david-dm.org/yantrashala/loopback-component-visualizer.svg) [![codecov](https://codecov.io/gh/yantrashala/loopback-component-visualizer/branch/master/graph/badge.svg)](https://codecov.io/gh/yantrashala/loopback-component-visualizer) [![GitHub issues](https://img.shields.io/github/issues/yantrashala/loopback-component-visualizer.svg)](https://github.com/yantrashala/loopback-component-visualizer/issues)
 
 ### Introduction
 
