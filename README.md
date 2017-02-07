@@ -9,9 +9,6 @@ trying to understand how models relate to eachother.
 
 loopback-component-visualizer helps you in creating a model diagram with the relation for you loopback application.
 
-### Version
-0.1.0
-
 ### Table of contents
 * Installation
 * Usage
