@@ -55,8 +55,8 @@ describe('checkFinalObject', function() {
   it('should compare the finalObject for address and customer.', function(done) {
       var finalObj = visualize.prepareJson(application);
       expect(finalObj.nodes).to.have.lengthOf(2);
-      expect(finalObj.nodes[0]).to.contain.all.keys({'name': 'Address'});
-      expect(finalObj.nodes[0]).to.contain.all.keys({'name': 'Customer'});
+      expect(finalObj.nodes[0]).to.contain.all.keys({'label': 'Address'});
+      expect(finalObj.nodes[0]).to.contain.all.keys({'label': 'Customer'});
       done();
   });
 
