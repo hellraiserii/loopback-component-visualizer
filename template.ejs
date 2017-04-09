@@ -90,17 +90,10 @@ body #header a#logo {
   </div>
 <div id="mynetwork"></div>
 <script type="text/javascript">
-var arr = [];
-<%
-for(var i in nodes) {
-  var node = nodes[i];
-  %>
-  arr.push({id: <%= node.id %>, label: '<%=node.name%>'});
-<%}%>
+
   // create an array with nodes
-    var nodes = new vis.DataSet(arr);
-  //
-  // // create an array with edges
+    var nodes = new vis.DataSet(<%- JSON.stringify(nodes, ["id", "label", "title"]) %>);
+  // create an array with edges
    var edges = new vis.DataSet(<%- JSON.stringify(edges) %>);
 
   // create a network
@@ -127,8 +120,13 @@ for(var i in nodes) {
       strokeColor: '#ffffff',
       align: 'left'
     }
+  },
+  layout: {
+        randomSeed: 2,
+        improvedLayout: true
+    }
   }
-}
+  
   var network = new vis.Network(container, data, options);
 
 </script>

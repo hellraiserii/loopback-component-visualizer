@@ -6,7 +6,7 @@ var _defaults = require('lodash').defaults;
 
 function visualize(loopbackApp, options) {
     options = _defaults({}, options, {
-        mountPath: '/visualize'
+        mountPath: '/visualize',
     });
     loopbackApp.use(options.mountPath, createDiagram(loopbackApp, options));
 }
@@ -41,14 +41,15 @@ function prepareJson(app) {
       });
       var modelDefinition = app.models[Model.modelName].definition;
       if (modelDefinition && modelDefinition.properties) {
-          var propString = Object.keys(modelDefinition.properties).toString().split(",").join('<li>');
+          var propString = Object.keys(modelDefinition.properties).toString().split(',').join('<li>');
 
           var propObj = {};
           propObj.id = idx;
-          propObj.name = Model.modelName;
-          propObj.props = propString;
+          propObj.label = Model.modelName;
+          propObj.props = '<ul><li>' + Object.keys(modelDefinition.properties).toString().split(',').join('<li>\n').replace('"', '') + '</ul>';
           propObj.level = level;
-          propObj.remotes = remotes && remotes.toString().split(',').join('<li>');
+          propObj.remotes = remotes && '<ul><li>' + remotes.toString().split(',').join('<li>\n').replace('"', '') + '</ul>';
+          propObj.title = '<h2>' + propObj.label + '</h2><h3>Props:</h3>\n' + propObj.props + '\n<h3>Remotes:</h3>' + propObj.remotes
           propArr.push(propObj);
           x++;
           if (x == 5) {
@@ -64,6 +65,9 @@ function prepareJson(app) {
                   var edgeObj = {};
                   edgeObj.from = modIdxObj[Model.modelName];
                   edgeObj.to = modIdxObj[Model.settings.relations[relArr[rel]].model];
+                  edgeObj.label = relArr[rel] || '';
+                  edgeObj.title = JSON.stringify(Model.settings.relations[relArr[rel]]);
+                  edgeObj.arrows = 'to';
                   edgeArr.push(edgeObj);
               }
           }
