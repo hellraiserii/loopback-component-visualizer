@@ -4,8 +4,8 @@
 <head>
   <title>Domain Model Visualizer</title>
 
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/vis/4.18.1/vis.min.js"></script>
-  <link href="//cdnjs.cloudflare.com/ajax/libs/vis/4.18.1/vis.min.css" rel="stylesheet" type="text/css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vis/4.18.1/vis.min.js" type="text/javascript"></script>
+  <link type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/vis/4.18.1/vis.min.css" rel="stylesheet">
 
   <style type="text/css">
     body {
@@ -128,7 +128,7 @@
 
   <script type="text/javascript">
     // create an array with nodes
-    var nodes = new vis.DataSet(<%- JSON.stringify(nodes, ["id", "label", "title"]) %>);
+    var nodes = new vis.DataSet(<%- JSON.stringify(nodes) %>);
     // create an array with edges
     var edges = new vis.DataSet(<%- JSON.stringify(edges) %>);
 
@@ -166,14 +166,40 @@
     var network = new vis.Network(container, data, options);
 
     network.on("select", function (params) {
-      console.log('select Event:', params);
-      var selected_node_idx = params.nodes[0];
-      document.getElementById('element_properties').innerHTML = data.nodes._data[selected_node_idx].title;
+      var element_properties;
+
+      if (params.nodes[0]) {
+        var selected_node_idx = params.nodes[0];
+        var node = data.nodes._data[selected_node_idx];
+        element_properties = '<h2>' + node.label + '</h2>\n'
+        element_properties += '<h3>Props:</h3>\n' + node.props + '\n';
+        element_properties += '<h3>Remotes:</h3>\n' + node.remotes;
+
+      } else if (params.edges[0]) {
+
+        console.log(params.edges[0]);
+        var selected_edge_idx = params.edges[0];
+        var edge = data.edges._data[selected_edge_idx];
+        console.log(edge);
+
+        element_properties = '<h2>' + edge.label + '</h2>\n';
+        element_properties += '<h3>Type:</h3>\n' + edge.type + '\n';
+        element_properties += '<h3>Model:</h3>\n' + edge.model + '\n';
+        element_properties += '<h3>ForeignKey:</h3>\n' + edge.foreignKey + '\n';
+        if (edge.options) element_properties += '<h3>Options:</h3>\n' + JSON.stringify(edge.options) + '\n';
+        if (edge.through) element_properties += '<h3>Through:</h3>\n' + edge.through + '\n';
+
+      } else {
+        element_properties = "Please select a node or an edge";
+      }
+
+      document.getElementById('element_properties').innerHTML = element_properties;
+
     });
   </script>
-  <div id="light" class="white_content">
+  <div class="white_content" id="light">
   </div>
-  <div id="fade" class="black_overlay"></div>
+  <div class="black_overlay" id="fade"></div>
 </body>
 
 </html>
